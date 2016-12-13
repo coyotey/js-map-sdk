@@ -1,6 +1,6 @@
 ![AirMap: The Airspace Platform for Developers](examples/header.png)
 
-[![npm version](https://badge.fury.io/js/airmap-map-sdk)](https://badge.fury.io/js/airmap-map-sdk)
+[![npm version](https://badge.fury.io/js/airmap-map-sdk.svg)](https://badge.fury.io/js/airmap-map-sdk)
 
 # AirMap SDK
 
