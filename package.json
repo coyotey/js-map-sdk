@@ -1,6 +1,6 @@
 {
   "name": "airmap-map-sdk",
-  "version": "2.0.0-beta5",
+  "version": "2.0.0",
   "description": "A wrapper for Mapbox GL JS & the AirMap Tile Service",
   "author": "AirMap, Inc. <developers@airmap.com> (https://airmap.com)",
   "license": "SEE LICENSE IN LICENSE.md",
