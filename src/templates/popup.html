@@ -1,0 +1,29 @@
+<div class="airspace-group">
+    <div class="airspace-group--title">
+        <%= constants.displayTypes[group] %>
+    </div>
+
+    <% _.forEach(items, function(item) { %>
+        <div class="airspace-group--item">
+            <% for (var key in item) { %>
+                <% if (key !== 'url' && item[key]) { %>
+                    <div class="airspace-group--property airspace-group--property--<%= key %>">
+                        <% if (key === 'name') { %>
+                            <% if (item.url) { %>
+                                <a href="<%= item.url %>" target="_blank"><%= item[key] %></a>
+                            <% } else { %>
+                                <%= item[key] %>
+                            <% } %>
+                        <% } else if (key === 'phone') { %>
+                            <strong><%= constants.displayProperties[key] %>: </strong>
+                            <a href="tel://<%= item[key] %>" target="_blank"><%= item[key] %></a>
+                        <% } else { %>
+                            <strong><%= constants.displayProperties[key] %>: </strong>
+                            <%= item[key] %>
+                        <% } %>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    <% }); %>
+</div>

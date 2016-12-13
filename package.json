@@ -1,0 +1,69 @@
+{
+  "name": "airmap-map-sdk",
+  "version": "2.0.0-beta5",
+  "description": "A wrapper for Mapbox GL JS & the AirMap Tile Service",
+  "author": "AirMap, Inc. <developers@airmap.com> (https://airmap.com)",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "keywords": [
+    "airmap",
+    "airspace",
+    "drones",
+    "maps",
+    "uav"
+  ],
+  "repository": "airmap/js-map-sdk",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "mkdir -p dist && npm run build:compile && npm run build:minify",
+    "build:compile": "browserify src/index.js -s Airmap.Map > dist/airmap.map.js",
+    "build:minify": "uglifyjs dist/airmap.map.js -m -c > dist/airmap.map.min.js",
+    "docs": "documentation build -f md src/* > API.md",
+    "prepublish": "rm -rf dist && mkdir dist && babel --out-dir dist src && npm run build && cp src/styles.css dist && cp -r src/templates dist",
+    "release": "npm install && npm test && npm run build && sh ./scripts/prepare.sh && sh ./scripts/deploy.sh",
+    "release:next": "npm install && npm test && npm run build && sh ./scripts/deploy-next.sh",
+    "standard-version": "standard-version",
+    "start": "budo ./src/index.js --serve=examples/bundle.js --port=8080 --live",
+    "test": "export NODE_PATH=./ && mocha --compilers js:babel-register --recursive test/unit/*"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "brfs"
+    ]
+  },
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "fg-loadcss": "^1.2.0",
+    "insert-css": "^2.0.0",
+    "load-script": "^1.0.0",
+    "lodash": "^4.5.1",
+    "mapbox-gl": "~0.28.0",
+    "mapbox-gl-shaders": "mapbox/mapbox-gl-shaders#26733535ba2f1b164dd6a231d4d1868c3218eafd",
+    "mapbox-gl-style-spec": "mapbox/mapbox-gl-style-spec#e85407a377510acb647161de6be6357ab4f606dd",
+    "moment": "^2.12.0",
+    "superagent": "^1.8.3",
+    "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-plugin-transform-object-rest-spread": "^6.16.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-register": "^6.18.0",
+    "babelify": "^7.2.0",
+    "brfs": "^1.4.3",
+    "browserify": "^13.0.0",
+    "budo": "^8.0.4",
+    "chai": "^3.5.0",
+    "documentation": "^4.0.0-beta11",
+    "jsdom": "^9.8.3",
+    "jsdom-global": "^2.1.0",
+    "mapbox-gl-js-mock": "^0.26.0",
+    "mocha": "^3.1.2",
+    "mockery": "^2.0.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
+    "standard-version": "^2.4.0",
+    "uglify-js": "^2.6.1"
+  }
+}

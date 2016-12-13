@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>AirMap | Maps SDK Sample</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='../dist/airmap.map.min.js'></script>
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+#map {
+    position: fixed;
+    width:50%;
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #142736;
+    color: #fff;
+
+}
+section {
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 16px;
+    height: 750px;
+    padding: 15%;
+    overflow: hidden;
+}
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+}
+</style>
+
+<div id='map'></div>
+<div id='features'>
+    <section id='base' class='active'>
+        <h2>Beautiful base maps</h2>
+    </section>
+    <section id='airports'>
+        <h2>Give notice to airports</h2>
+        <p>Fly within the 5 mile boundary of an airport by giving notice to control towers through AirMap</p>
+    </section>
+    <section id='controlled_airspace'>
+        <h2>Controlled Airspace for manned flight</h2>
+        <p>Watch out for helicopters and fixed wing aircraft by viewing controlled airspace near you</p>
+    </section>
+    <section id='local'>
+        <h2>Local regulations</h2>
+        <p>Check out what your local jurisdiction says about flying near schools, hospitals, and other places around town</p>
+    </section>
+    <section id='temp_restrictions'>
+        <h2>Temporary flight restrictions</h2>
+        <p>Be aware of local sports events, potential hazardous conditions, fires, or any other temporary flight restrictions that might pop up</p>
+    </section>
+    <section id='parks'>
+        <h2>National Parks and NOAA</h2>
+        <p>View the parks you can (and can't) fly in</p>
+    </section>
+    <section id='theming'>
+        <h2>Dynamic theming</h2>
+        <p>Dynamically theme and style the base map and airspace information to your liking</p>
+    </section>
+</div>
+<script>
+
+var AIRMAP_API_KEY = localStorage.getItem('AIRMAP_API_KEY');
+var MAPBOX_ACCESS_TOKEN = localStorage.getItem('MAPBOX_ACCESS_TOKEN');
+if (AIRMAP_API_KEY && MAPBOX_ACCESS_TOKEN) {
+    var config = {
+        "airmap": { "api_key": AIRMAP_API_KEY },
+        "mapbox": { "access_token": MAPBOX_ACCESS_TOKEN }
+    };
+    var map = new Airmap.Map(config, {
+        container: 'map',
+        theme: 'standard',
+        useLocation: false,
+        layers: [ 'airports_recreational', 'heliports', 'class_b', 'class_c', 'class_d', 'class_e0' ],
+        center: [34.0219, -118.4814],
+        zoom: 9,
+        pitch: 35,
+        hash: false,
+        showControls: false,
+        showSearch: false,
+        interactive: false,
+        createFlights: false,
+        theme: 'dark'
+    });
+} else {
+    console.error(
+        'Missing AIRMAP_API_KEY or MAPBOX_ACCESS_TOKEN. ' +
+        'These are required for developing the Maps SDK locally.\n\n' +
+        'Please save these values in localStorage by entering the following in your browser console:\n\n' +
+        'localStorage.setItem(\'AIRMAP_API_KEY\', \'<your_key>\');\n' +
+        'localStorage.setItem(\'MAPBOX_ACCESS_TOKEN\', \'<your_token>\');\n\n'
+    );
+}
+
+var chapters = {
+    'base': {
+        camera: {
+            bearing: 0,
+            center: [-118.4814, 34.0219],
+            zoom: 9,
+            pitch: 35
+        },
+        layers: [ 'airports_recreational', 'heliports', 'class_b', 'class_c', 'class_d', 'class_e0' ],
+    },
+    'airports': {
+        camera: {
+            duration: 6000,
+            center: [-118.4081, 33.9425],
+            bearing: 75,
+            zoom: 15,
+            pitch: 60
+        },
+        layers: [ 'airports_recreational' ],
+        interactive: true
+    },
+    'controlled_airspace': {
+        camera: {
+            bearing: 0,
+            center: [-118.4081, 33.9425],
+            zoom: 13,
+            speed: 0.6,
+            pitch: 40
+        },
+        layers: [ 'class_b', 'class_c', 'class_d', 'class_e0' ]
+    },
+    'parks': {
+        camera: {
+            bearing: 0,
+            center: [-118.6025, 34.1039],
+            zoom: 13,
+            speed: 0.6,
+            pitch: 40
+        },
+        layers: [ 'national_parks', 'noaa' ]
+    },
+    'local': {
+        camera: {
+            bearing: 320,
+            center: [-118.4707, 34.0168],
+            zoom: 13,
+            speed: 0.6,
+            pitch: 40
+        },
+        layers: [ 'schools', 'heliports', 'hospitals' ]
+    },
+    'temp_restrictions': {
+        camera: {
+            bearing: 65,
+            center: [-117.9190, 33.8090],
+            zoom: 13.0
+        },
+        layers: [ 'tfrs' ],
+        theme: 'dark'
+    },
+    'theming': {
+        camera: {
+            bearing: 65,
+            center: [-117.9190, 33.8090],
+            zoom: 13.0
+        },
+        theme: 'light'
+    }
+};
+
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+
+var activeChapterName = 'base';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+    var section = chapters[chapterName];
+
+    if (section.camera)
+        map.flyTo(section.camera);
+
+    if (section.layers)
+        map.setLayers(section.layers);
+
+    if (section.theme && section.theme != map.getTheme()) {
+        map.theme(chapters[chapterName].theme);
+    }
+
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+
+    activeChapterName = chapterName;
+}
+
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+
+</script>
+
+</body>
+</html>

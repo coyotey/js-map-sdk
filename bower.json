@@ -1,0 +1,18 @@
+{
+  "name": "airmap-map-sdk",
+  "description": "A wrapper for Mapbox GL JS & the AirMap Tile Service",
+  "main": "src/index.js",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "keywords": [
+    "airmap",
+    "airspace",
+    "drones",
+    "maps",
+    "uav"
+  ],
+  "ignore": [
+    "scripts",
+    "examples",
+    "test"
+  ]
+}

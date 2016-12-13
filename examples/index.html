@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AirMap | Maps SDK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="bundle.js"></script>
+
+    <style>
+        body {
+            margin:0;
+            padding:0;
+        }
+
+        #map {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="z-index: -1"></div>
+
+    <script>
+        var AIRMAP_API_KEY = localStorage.getItem('AIRMAP_API_KEY');
+        var MAPBOX_ACCESS_TOKEN = localStorage.getItem('MAPBOX_ACCESS_TOKEN');
+        if (AIRMAP_API_KEY && MAPBOX_ACCESS_TOKEN) {
+            var config = {
+                "airmap": { "api_key": AIRMAP_API_KEY },
+                "mapbox": { "access_token": MAPBOX_ACCESS_TOKEN }
+            };
+            var map = new Airmap.Map(config, {
+                container: 'map',
+                center: [33.9416, -118.4085],
+                zoom: 12,
+                theme: 'light',
+                createFlights: false,
+                showSearch: true,
+                showPopups: true,
+                useLocation: true,
+                layers: [ 'airports_recreational', 'class_b', 'national_parks', 'tfrs', 'wildfires', 'universities' ]
+            });
+            map.on('click', function(e) {
+                console.log('click', e);
+            });
+            map.on('airspace.click', function(e) {
+                console.log('airspace.click', e);
+            });
+        } else {
+            console.error(
+                'Missing AIRMAP_API_KEY or MAPBOX_ACCESS_TOKEN. ' +
+                'These are required for developing the Maps SDK locally.\n\n' +
+                'Please save these values in localStorage by entering the following in your browser console:\n\n' +
+                'localStorage.setItem(\'AIRMAP_API_KEY\', \'<your_key>\');\n' +
+                'localStorage.setItem(\'MAPBOX_ACCESS_TOKEN\', \'<your_token>\');\n\n'
+            );
+        }
+    </script>
+</body>
+
+</html>
