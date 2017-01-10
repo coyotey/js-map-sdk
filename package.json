@@ -38,8 +38,6 @@
     "load-script": "^1.0.0",
     "lodash": "^4.5.1",
     "mapbox-gl": "~0.28.0",
-    "mapbox-gl-shaders": "mapbox/mapbox-gl-shaders#26733535ba2f1b164dd6a231d4d1868c3218eafd",
-    "mapbox-gl-style-spec": "mapbox/mapbox-gl-style-spec#e85407a377510acb647161de6be6357ab4f606dd",
     "moment": "^2.12.0",
     "superagent": "^1.8.3",
     "uuid": "^2.0.1"
