@@ -634,6 +634,16 @@ class AirspaceMap {
     }
 
     /**
+     * Wraps Mapbox GL's Map.getContainer.
+     * {@link https://www.mapbox.com/mapbox-gl-js/api/#Map#getContainer|[docs]}
+     * @public
+     * @returns {HTMLElement} - The map's container.
+     */
+     getContainer() {
+        return this.map.getContainer()
+     }
+
+    /**
      * Drops a marker at the provided location.
      * @public
      * @param {number} latitude - Latitude of the location.
