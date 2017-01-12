@@ -198,6 +198,17 @@ Wraps Mapbox GL's Map.addControl.
 
 Returns **[AirspaceMap](#airspacemap)** `this`
 
+## removeControl
+
+Wraps Mapbox GL's Map.removeControl.
+[\[docs\]](https://www.mapbox.com/mapbox-gl-js/api/#Map#removeControl)
+
+**Parameters**
+-   `control` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+** The [Control](https://www.mapbox.com/mapbox-gl-js/api/#Control) to remove.
+
+Returns **[AirspaceMap](#airspacemap)** `this`
+
 ## getTheme
 
 Returns the theme that is currently active.
