@@ -226,6 +226,13 @@ Updates the current theme by requesting new map tiles.
 
 -   Throws **BadOptionError** Will throw an error if the provided theme is invalid.
 
+## getContainer
+
+Wraps Mapbox GL's Map.getContainer. Returns the map's containing HTML element.
+[\[docs\]](https://www.mapbox.com/mapbox-gl-js/api/#Map#getContainer)
+
+Returns **[HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)**
+
 ## addMarker
 
 Drops a marker at the provided location.

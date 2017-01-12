@@ -479,6 +479,18 @@ describe('AirspaceMap#theme', () => {
 
 })
 
+describe('AirspaceMap#getContainer', () => {
+
+    it('should return the map container HTML element', () => {
+        const stub = sinon.stub(mapboxglMock.Map.prototype, 'getContainer')
+        const actual = new AirspaceMap(configMock)
+        actual.getContainer()
+        expect(stub).to.have.been.calledOnce
+        stub.restore()
+    })
+
+})
+
 describe('AirspaceMap#addMarker', () => {
 
     it('should call _renderMarkers', () => {
