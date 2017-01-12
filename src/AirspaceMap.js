@@ -588,6 +588,18 @@ class AirspaceMap {
     }
 
     /**
+     * Wraps Mapbox GL's Map.removeControl.
+     * {@link https://www.mapbox.com/mapbox-gl-js/api/#Map#removeControl|[docs]}
+     * @public
+     * @param {Object} control - The {@link https://www.mapbox.com/mapbox-gl-js/api/#Control|Control} to remove.
+     * @returns {AirspaceMap} - `this` 
+     */
+     removeControl(control) {
+        this.map.removeControl(control)
+        return this
+     }
+
+    /**
      * Returns the theme that is currently active.
      * @public
      * @returns {string} theme - Theme that is currently displayed on the map.

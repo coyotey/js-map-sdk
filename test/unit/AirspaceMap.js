@@ -16,6 +16,7 @@ before(() => {
     mapboxglMock.Map.prototype.flyTo = () => null
     mapboxglMock.Map.prototype.getCenter = () => null
     mapboxglMock.Map.prototype.remove = () => null
+    mapboxglMock.Map.prototype.removeControl = () => null
     mapboxglMock.Map.prototype.resize = () => null
     mapboxglMock.Map.prototype.setLayoutProperty = () => null
     mapboxglMock.Map.prototype.zoomTo = () => null
@@ -418,6 +419,18 @@ describe('AirspaceMap#addControl', () => {
         const stub = sinon.stub(mapboxglMock.Map.prototype, 'addControl', () => null)
         const actual = new AirspaceMap(configMock)
         actual.addControl({})
+        expect(stub).to.have.been.calledWith({})
+        stub.restore()
+    })
+
+})
+
+describe('AirspaceMap#removeControl', () => {
+
+    it('should call mapboxgl.Map.removeControl', () => {
+        const stub = sinon.stub(mapboxglMock.Map.prototype, 'removeControl', () => null)
+        const actual = new AirspaceMap(configMock)
+        actual.removeControl({})
         expect(stub).to.have.been.calledWith({})
         stub.restore()
     })
