@@ -40,6 +40,7 @@ class AirspaceMap {
      * @param {boolean} [opts.showSearch=false] - Render a search bar that allows users to query for a specific location.
      * @param {boolean} [opts.useLocation=true] - Attempt to center the map on a user's location if their browser allows geolocation.
      * @param {boolean} [opts.createFlights=false] - Insert an 'add flight here' button in popups that allows users to create a flight using DNAS Basic Integration.
+     * @param {boolean} [opts.suppressWarnings=false] - Log a warning when using the mapboxgl getter.
      */
     constructor(config = {}, opts) {
         if (!this._supported()) {
@@ -707,7 +708,7 @@ class AirspaceMap {
      * @public
      */
     get mapboxgl() {
-        if (window.console && window.console.warn) {
+        if (window.console && window.console.warn && !this.opts.suppressWarnings) {
             console.warn('AirMap: Methods you call using the mapboxgl getter are subject to change based on minor ' +
                          'version updates in Mapbox GL JS. If you need to use this feature, it is recommended that ' +
                          'you lock your SDK to a specific version.')
@@ -767,7 +768,8 @@ AirspaceMap.defaults = {
     useLocation: false,
     createFlights: false,
     tileServiceUrl: 'https://api.airmap.com/maps/v4/tilejson',
-    webAppUrl: 'https://app.airmap.io'
+    webAppUrl: 'https://app.airmap.io',
+    suppressWarnings: false
 }
 
 

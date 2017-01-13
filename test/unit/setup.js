@@ -46,7 +46,8 @@ const defaultOptions = {
     useLocation: false,
     createFlights: false,
     tileServiceUrl: 'https://api.airmap.com/maps/v4/tilejson',
-    webAppUrl: 'https://app.airmap.io'
+    webAppUrl: 'https://app.airmap.io',
+    suppressWarnings: false
 }
 
 before(() => {

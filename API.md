@@ -27,6 +27,7 @@ Configure map, set options, and load stylesheets.
     -   `opts.showSearch` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Render a search bar that allows users to query for a specific location. (optional, default `false`)
     -   `opts.useLocation` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Attempt to center the map on a user's location if their browser allows geolocation. (optional, default `true`)
     -   `opts.createFlights` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Insert an 'add flight here' button in popups that allows users to create a flight using DNAS Basic Integration. (optional, default `false`)
+    -   `opts.suppressWarnings` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Log a warning when using the mapboxgl getter. (optional, default: `false`)
 
 ## setLayers
 

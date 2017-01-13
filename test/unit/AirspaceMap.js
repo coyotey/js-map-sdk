@@ -15,6 +15,7 @@ before(() => {
     mapboxglMock.Map.prototype.fitBounds = () => null
     mapboxglMock.Map.prototype.flyTo = () => null
     mapboxglMock.Map.prototype.getCenter = () => null
+    mapboxglMock.Map.prototype.mapboxgl = () => null
     mapboxglMock.Map.prototype.remove = () => null
     mapboxglMock.Map.prototype.removeControl = () => null
     mapboxglMock.Map.prototype.resize = () => null
@@ -528,6 +529,17 @@ describe('AirspaceMap#remove', () => {
         actual.remove()
         expect(spy).to.have.been.calledOnce
         spy.restore()
+    })
+
+})
+
+describe('AirspaceMap#getMapboxgl', () => {
+
+    it('should log a warning if suppressWarning is false', () => {
+        const actual = new AirspaceMap(configMock)
+        sinon.stub(console, 'warn')
+        actual.mapboxgl
+        expect(console.warn.calledOnce).to.be.true
     })
 
 })
