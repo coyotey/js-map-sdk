@@ -40,6 +40,7 @@ class AirspaceMap {
      * @param {boolean} [opts.showSearch=false] - Render a search bar that allows users to query for a specific location.
      * @param {boolean} [opts.useLocation=true] - Attempt to center the map on a user's location if their browser allows geolocation.
      * @param {boolean} [opts.createFlights=false] - Insert an 'add flight here' button in popups that allows users to create a flight using DNAS Basic Integration.
+     * @param {boolean} [opts.suppressWarnings=false] - Log a warning when using the mapboxgl getter.
      */
     constructor(config = {}, opts) {
         if (!this._supported()) {
