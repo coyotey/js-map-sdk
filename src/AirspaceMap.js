@@ -707,7 +707,7 @@ class AirspaceMap {
      * @public
      */
     get mapboxgl() {
-        if (window.console && window.console.warn) {
+        if (window.console && window.console.warn && !this.opts.suppressWarnings) {
             console.warn('AirMap: Methods you call using the mapboxgl getter are subject to change based on minor ' +
                          'version updates in Mapbox GL JS. If you need to use this feature, it is recommended that ' +
                          'you lock your SDK to a specific version.')
@@ -767,7 +767,8 @@ AirspaceMap.defaults = {
     useLocation: false,
     createFlights: false,
     tileServiceUrl: 'https://api.airmap.com/maps/v4/tilejson',
-    webAppUrl: 'https://app.airmap.io'
+    webAppUrl: 'https://app.airmap.io',
+    suppressWarnings: false
 }
 
 
