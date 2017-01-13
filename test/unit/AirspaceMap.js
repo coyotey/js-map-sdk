@@ -536,12 +536,10 @@ describe('AirspaceMap#remove', () => {
 describe('AirspaceMap#getMapboxgl', () => {
 
     it('should log a warning if suppressWarning is false', () => {
-        const spy = sinon.spy(mapboxglMock.Map.prototype, 'mapboxgl')
         const actual = new AirspaceMap(configMock)
-        sinon.spy(console, 'warn')
+        sinon.stub(console, 'warn')
         actual.mapboxgl
         expect(console.warn.calledOnce).to.be.true
-        spy.restore()
     })
 
 })
