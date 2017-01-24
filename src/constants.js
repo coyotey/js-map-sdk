@@ -55,7 +55,7 @@ exports.displayTypes = {
     'class_d': 'Controlled Airspace (Class D)',
     'class_e0': 'Controlled Airspace (Class E to Ground)',
     'custom': 'Custom',
-    'emergencies': 'Emergencies',
+    'emergencies': 'First Responder Activity',
     'fires': 'Fires',
     'hazard_areas': 'Hazard Areas',
     'heliports': 'Heliports',
