@@ -36,11 +36,11 @@ exports.formatPopupData = (properties) => {
             f.date_effective = moment(f.date_effective).format('MMMM Do YYYY, h:mm a')
             if (_.has(p, 'date_expire') && moment(f.date_expire).format('YYYY') != 9999) {
                 f.date_expire = moment(f.date_expire).format('MMMM Do YYYY, h:mm a')
-            } else if (p.type !== 'wildfires') {
+            } else if (['wildfires', 'fires', 'emergencies'].indexOf(p.type) < 0) {
                 f.date_expire = 'Permanent'
             }
         }
-        if (p.type === 'wildfires') _.unset(f, ['name'])
+        if (['wildfires', 'fires', 'emergencies'].indexOf(p.type) > -1) _.unset(f, ['name'])
         return f
     })
     return _.groupBy(formatted, i => i.type)
