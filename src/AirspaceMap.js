@@ -38,9 +38,9 @@ class AirspaceMap {
      * @param {boolean} [opts.showControls=true] - Show controls for zoom and bearing.
      * @param {boolean} [opts.showPopups=true] - Show a popup with airspace information when a user clicks on the map.
      * @param {boolean} [opts.showSearch=false] - Render a search bar that allows users to query for a specific location.
-     * @param {boolean} [opts.useLocation=true] - Attempt to center the map on a user's location if their browser allows geolocation.
-     * @param {boolean} [opts.createFlights=false] - Insert an 'add flight here' button in popups that allows users to create a flight using DNAS Basic Integration.
-     * @param {boolean} [opts.suppressWarnings=false] - Log a warning when using the mapboxgl getter.
+     * @param {boolean} [opts.useLocation=true] - Attempt to center the map on a user location.
+     * @param {boolean} [opts.createFlights=false] - Insert button in popups that allows users to create a flight using DNAS Basic Integration.
+     * @param {boolean} [opts.suppressWarnings=false] - Suppress developer warnings.
      */
     constructor(config = {}, opts) {
         if (!this._supported()) {
@@ -593,7 +593,7 @@ class AirspaceMap {
      * {@link https://www.mapbox.com/mapbox-gl-js/api/#Map#removeControl|[docs]}
      * @public
      * @param {Object} control - The {@link https://www.mapbox.com/mapbox-gl-js/api/#Control|Control} to remove.
-     * @returns {AirspaceMap} - `this` 
+     * @returns {AirspaceMap} - `this`
      */
      removeControl(control) {
         this.map.removeControl(control)
