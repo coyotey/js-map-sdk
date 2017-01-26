@@ -3356,6 +3356,18 @@
         }
       }
     },
+    "mapbox-gl-style-spec": {
+      "version": "8.11.0",
+      "from": "mapbox-gl-style-spec@latest",
+      "resolved": "https://registry.npmjs.org/mapbox-gl-style-spec/-/mapbox-gl-style-spec-8.11.0.tgz",
+      "dependencies": {
+        "minimist": {
+          "version": "0.0.8",
+          "from": "minimist@0.0.8",
+          "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz"
+        }
+      }
+    },
     "mapbox-gl-supported": {
       "version": "1.2.0",
       "from": "mapbox-gl-supported@>=1.2.0 <2.0.0",
