@@ -1,9 +1,8 @@
 machine:
     node:
-        version: 5.5.0
+        version: 7.2.0
 
-general:
-    branches:
-        only:
-            - master
-            - next
+test:
+    override:
+        - mkdir -p $CIRCLE_TEST_REPORTS/mocha
+        - npm run test:circle
